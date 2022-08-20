@@ -1,10 +1,13 @@
 package br.com.matheliasc.Vendedores.service;
 
-import br.com.matheliasc.Vendedores.model.Vendedor;
+import br.com.matheliasc.Vendedores.model.dto.VendedorDTO;
+import br.com.matheliasc.Vendedores.model.form.VendedorForm;
 
 import java.util.List;
 
 public interface VendedorService {
 
-    public List<Vendedor> findAll();
+    List<VendedorDTO> findAll();
+
+    VendedorDTO save(VendedorForm form);
 }
