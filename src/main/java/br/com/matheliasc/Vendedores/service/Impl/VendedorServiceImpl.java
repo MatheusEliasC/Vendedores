@@ -2,6 +2,7 @@ package br.com.matheliasc.Vendedores.service.Impl;
 
 import br.com.matheliasc.Vendedores.model.Vendedor;
 import br.com.matheliasc.Vendedores.model.dto.VendedorDTO;
+import br.com.matheliasc.Vendedores.model.dto.VendedorIdDTO;
 import br.com.matheliasc.Vendedores.model.form.VendedorForm;
 import br.com.matheliasc.Vendedores.repository.VendedorRepository;
 import br.com.matheliasc.Vendedores.service.AtuacaoService;
@@ -39,5 +40,12 @@ public class VendedorServiceImpl implements VendedorService {
         List<String> listaRegiao = atuacaoService.getEstadosByRegiao(form.getRegiao());
         Vendedor vendedor = vendedorRepository.save(form.converterParaVendedor());
         return new VendedorDTO(vendedor,listaRegiao);
+    }
+
+    @Override
+    public VendedorIdDTO findById(Integer id) {
+        Vendedor vendedor = vendedorRepository.findById(id).orElseThrow();
+        List<String> listaRegiao = atuacaoService.getEstadosByRegiao(vendedor.getRegiao());
+        return new VendedorIdDTO(vendedor,listaRegiao);
     }
 }
