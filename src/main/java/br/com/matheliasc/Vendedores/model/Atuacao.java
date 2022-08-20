@@ -21,5 +21,4 @@ public class Atuacao {
     private String regiao;
     @ElementCollection(targetClass = String.class)
     private List<String> estados;
-
 }
