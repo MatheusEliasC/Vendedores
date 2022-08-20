@@ -2,18 +2,21 @@ package br.com.matheliasc.Vendedores.controller;
 
 import br.com.matheliasc.Vendedores.model.Vendedor;
 import br.com.matheliasc.Vendedores.model.dto.VendedorDTO;
+import br.com.matheliasc.Vendedores.model.dto.VendedorIdDTO;
 import br.com.matheliasc.Vendedores.model.form.VendedorForm;
 import br.com.matheliasc.Vendedores.service.AtuacaoService;
 import br.com.matheliasc.Vendedores.service.VendedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.List;
 
@@ -38,5 +41,11 @@ public class VendedorController {
         VendedorDTO vendedor = service.save(form);
         URI uri = uriBuilder.path("/vendedor/{id}").buildAndExpand(vendedor.getId()).toUri();
         return ResponseEntity.created(uri).body(vendedor);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<VendedorIdDTO> getVendedorPorID(@PathVariable @NotNull Integer id){
+        VendedorIdDTO vendedor = service.findById(id);
+        return ResponseEntity.ok(vendedor);
     }
 }
