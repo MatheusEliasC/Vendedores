@@ -9,14 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class AtuacaoServiceImpl implements AtuacaoService {
 
-    @Autowired
     private AtuacaoRepository atuacaoRepository;
+
+    @Autowired
+    public AtuacaoServiceImpl(AtuacaoRepository atuacaoRepository) {
+        this.atuacaoRepository = atuacaoRepository;
+    }
 
     @Override
     public List<String> getEstadosByRegiao(String regiao) {
@@ -26,10 +28,7 @@ public class AtuacaoServiceImpl implements AtuacaoService {
 
     @Override
     public Atuacao findByRegiao(String regiao) {
-        Optional<Atuacao> atuacaoOPT = atuacaoRepository.findByRegiao(regiao);
-        if(atuacaoOPT.isEmpty())
-            throw new NoSuchElementException("Regiao fornecida não corresponde a uma Atuacao válida!");
-        return atuacaoOPT.get();
+        return atuacaoRepository.findByRegiao(regiao).orElseThrow();
     }
 
     @Override

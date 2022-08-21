@@ -17,11 +17,15 @@ import java.util.NoSuchElementException;
 @Service
 public class VendedorServiceImpl implements VendedorService {
 
-    @Autowired
     private VendedorRepository vendedorRepository;
 
-    @Autowired
     private AtuacaoService atuacaoService;
+
+    @Autowired
+    public VendedorServiceImpl(VendedorRepository vendedorRepository, AtuacaoService atuacaoService){
+        this.vendedorRepository = vendedorRepository;
+        this.atuacaoService = atuacaoService;
+    }
 
     @Override
     public List<VendedorDTO> findAll() {
@@ -29,9 +33,7 @@ public class VendedorServiceImpl implements VendedorService {
         if(vendedores.isEmpty())
             throw new NoSuchElementException();
         List<VendedorDTO> vendedoresDTO = new ArrayList<>();
-        vendedores.forEach(vendedor -> {
-            vendedoresDTO.add(new VendedorDTO(vendedor, atuacaoService.getEstadosByRegiao(vendedor.getRegiao())));
-        });
+        vendedores.forEach(vendedor -> vendedoresDTO.add(new VendedorDTO(vendedor, atuacaoService.getEstadosByRegiao(vendedor.getRegiao()))));
         return vendedoresDTO;
     }
 

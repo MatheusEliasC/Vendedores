@@ -1,6 +1,5 @@
 package br.com.matheliasc.Vendedores.controller;
 
-import br.com.matheliasc.Vendedores.model.Vendedor;
 import br.com.matheliasc.Vendedores.model.dto.VendedorDTO;
 import br.com.matheliasc.Vendedores.model.dto.VendedorIdDTO;
 import br.com.matheliasc.Vendedores.model.form.VendedorForm;
@@ -39,7 +38,7 @@ public class VendedorController {
     @PostMapping
     public ResponseEntity<VendedorDTO> salvaVendedor(@RequestBody VendedorForm form, UriComponentsBuilder uriBuilder){
         VendedorDTO vendedor = service.save(form);
-        URI uri = uriBuilder.path("/vendedor/{id}").buildAndExpand(vendedor.getId()).toUri();
+        URI uri = uriBuilder.path("/vendedor/{id}").buildAndExpand(vendedor).toUri();
         return ResponseEntity.created(uri).body(vendedor);
     }
 
