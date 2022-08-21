@@ -44,3 +44,7 @@ Ao executar a aplicação também é possível observar a estrutura do banco de 
 
 ## Testes unitários  
 As classes de teste podem ser encontradas em: [Vendedor](../main/src/test/java/br/com/matheliasc/Vendedores/service/impl/VendedorServiceImplTest.java) e [Atuacao](../main/src/test/java/br/com/matheliasc/Vendedores/service/impl/AtuacaoServiceImplTest.java).
+
+
+## Postman
+Para testar a aplicação e o retorno dos endpoints, utilizei o Software Postman e disponibilizei a collection que pode ser importada para utilização, ela pode ser encontrada em: [Postman](../main/Vendedores.postman_collection.json)
